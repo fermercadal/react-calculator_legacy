@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+  align-items: center;
+  background: orange;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.calculator {
+  display: flex;
+  flex-flow: row wrap;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  width: 240px;
+}
+
+.display {
+  padding: 5px;
+  width: 100%;
+}
+
+button {
+  height: 50px;
+  margin: 5px;
+  width: 50px;
+}
+
