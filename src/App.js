@@ -2,26 +2,44 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-  // goes up to minute 48:15
-  
   constructor(props) {
     super(props);
 
     this.state = {
       lastPressed: undefined,
-      firstNumber: undefined
+      currentNumber: '0',
+      previousNumber: undefined
     }
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick = (e) => {
+    const lastPressed = this.state.lastPressed;
+    const currentNumber = this.state.currentNumber;
+    const previousNumber = this.state.previousNumber;
     const value = e.target.innerText;
-    console.log(value);
     
+    if(!Number.isNaN(Number(value))) {
+      if (currentNumber === 0) {
+        this.setState({
+          currentNumber = value
+        });
+      } else {
+        this.setState({
+          currentNumber = currentNumber + value
+        });
+      }
+      
+    }
+
     switch(value) {
 
     }
+
+    this.setState({
+      lastPressed: value
+    });
   }
 
   render() {
