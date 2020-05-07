@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+// up to 1:09:12
 
 class App extends Component {
   constructor(props) {
