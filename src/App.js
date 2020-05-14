@@ -25,6 +25,7 @@ class App extends Component {
     if(!Number.isNaN(Number(value))) {
       if(lastPressed === '=' && operation === '=') {
         this.setState({
+          lastPressed: value,
           currentNumber : value,
           operation: '',
           previousNumber: ''
@@ -32,15 +33,16 @@ class App extends Component {
       } else {
         if (currentNumber === '0') {
           this.setState({
+            lastPressed: value,
             currentNumber : value
           });
         } else {
           this.setState({
+            lastPressed: value,
             currentNumber : currentNumber + value
           });
         }
       }
-
       return
     }
 
@@ -68,24 +70,26 @@ class App extends Component {
             previousNumber: currentNumber,
             currentNumber: '0'
           });
-        } else if(lastPressed === '=' && operation === '=') {
+        } 
+        // If press second operation
+        if(Number.isNaN(lastPressed)) {
+          console.log('second operation');
+        }
+
+        // If press operation after getting a result
+        else if(lastPressed === '=' && operation === '=') {
           if(value !== '=') {
             this.setState({
               operation: value,
               previousNumber: currentNumber,
               currentNumber: '0'
             });
-          } else {
+          } 
+          // If press two consecutive equals
+          else {
             return false;
           }
-        } /*else if (lastPressed === '/' || lastPressed === '*') {
-          if(value === '-') {
-            this.setState({
-              currentNumber: value
-            });
-            return false
-          }
-        } */else {
+        } else {
           const evaluated = eval(`${previousNumber} ${operation}  ${currentNumber}`)
 
           this.setState({
@@ -171,7 +175,9 @@ class App extends Component {
     const previousNumber = this.state.previousNumber;
     const operation = this.state.operation;
     const currentNumber = this.state.currentNumber;
-    const currentOperation = currentNumber === '0' && previousNumber === '' ? '' : `${ previousNumber } ${ operation }  ${ currentNumber }`;
+
+    const thisCurrent = currentNumber === '0' ? '' : currentNumber;
+    const currentOperation = currentNumber === '0' && previousNumber === '' ? '' : `${ previousNumber } ${ operation }  ${ thisCurrent }`;
 
     return (
       <main id="calculator" className="calculator">
