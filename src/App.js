@@ -64,18 +64,32 @@ class App extends Component {
         break
       }
       default: {
-        if(!operation) {
-          this.setState({
-            operation: value,
-            previousNumber: currentNumber,
-            currentNumber: '0'
-          });
-        } 
-        // If press second operation
-        if(Number.isNaN(lastPressed)) {
-          console.log('second operation');
+        // if press operation without first number 
+        if(value === '-') {
+          if(lastPressed === '' || lastPressed === '0' || lastPressed === 'AC'  ) {
+            this.setState({
+              currentNumber: value
+            });
+            return false;
+          }
         }
 
+        if(currentNumber === '0' && value !== '-') {
+          return false;
+        }
+
+        // If press operation for the first time
+        if(!operation) {
+          if(value === '=') {
+            return false;
+          } else {
+            this.setState({
+              operation: value,
+              previousNumber: currentNumber,
+              currentNumber: '0'
+            });
+          }
+        }
         // If press operation after getting a result
         else if(lastPressed === '=' && operation === '=') {
           if(value !== '=') {
@@ -89,7 +103,10 @@ class App extends Component {
           else {
             return false;
           }
-        } else {
+        }
+        
+        // ...
+        else {
           const evaluated = eval(`${previousNumber} ${operation}  ${currentNumber}`)
 
           this.setState({
@@ -181,8 +198,9 @@ class App extends Component {
 
     return (
       <main id="calculator" className="calculator">
+      
       <p style={{position: 'absolute', top: 0}}>
-        { JSON.stringify(this.state, null, 2) }
+        { /* JSON.stringify(this.state, null, 2) */ }
       </p>
        
         <div className="currentOperation">
