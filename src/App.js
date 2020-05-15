@@ -74,10 +74,6 @@ class App extends Component {
           }
         }
 
-        if(currentNumber === '0' && value !== '-') {
-          return false;
-        }
-
         // If press operation for the first time
         if(!operation) {
           if(value === '=') {
@@ -90,6 +86,7 @@ class App extends Component {
             });
           }
         }
+
         // If press operation after getting a result
         else if(lastPressed === '=' && operation === '=') {
           if(value !== '=') {
@@ -107,7 +104,15 @@ class App extends Component {
         
         // ...
         else {
-          const evaluated = eval(`${previousNumber} ${operation}  ${currentNumber}`)
+          console.log('operation' + value);
+          if(
+            value === '/' ||
+            value === '*' ||
+            value === '+'
+          ) {
+
+          }
+          const evaluated = eval(`${previousNumber} ${operation} ${currentNumber}`)
 
           this.setState({
             operation: value,
@@ -200,7 +205,7 @@ class App extends Component {
       <main id="calculator" className="calculator">
       
       <p style={{position: 'absolute', top: 0}}>
-        { /* JSON.stringify(this.state, null, 2) */ }
+        { JSON.stringify(this.state, null, 2) }
       </p>
        
         <div className="currentOperation">
