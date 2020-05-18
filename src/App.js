@@ -26,10 +26,6 @@ class App extends Component {
         {
           value: '+',
           id: 'add'
-        }, 
-        {
-          value: '=',
-          id: 'equals'
         }
       ],
       numbers: [
@@ -230,9 +226,15 @@ class App extends Component {
             currentNumber: '0'
           });
         }
+        break;
+      }
+
+      default : {
+        return false;
       }
     }
   }
+
   render() {
     const numbers = this.state.numbers;
     const operations = this.state.operations;
@@ -246,50 +248,67 @@ class App extends Component {
 
     return (
       <main id="calculator" className="calculator">
-      
-      <p style={{position: 'absolute', top: 0}}>
-        { JSON.stringify(this.state, null, 2) }
-      </p>
-       
-        <div className="currentOperation">
-          { currentOperation }
+        <div className="calculator-top">
+          <h1>React JS Calculator</h1>
+          <section className="screen">
+            <div className="currentOperation">
+              { currentOperation }
+            </div>
+            <div className="display" id="display">
+              { currentNumber }
+            </div>
+          </section>
         </div>
-        <div className="display" id="display">
-          { currentNumber }
+
+        <div className="calculator-buttons">
+          <section className="numbers">
+            <button 
+              className="ac" 
+              id="clear"
+              onClick={this.handleAcClick}>
+                AC
+            </button>
+
+            { numbers.map(number => (
+              <button 
+                key={ number.value }
+                id={ number.id }
+                onClick={this.handleNumberClick}>
+                { number.value }
+              </button>
+            )) }
+
+            <button 
+              className="dot"
+              id="decimal"
+              onClick={this.handleDecimalClick}>
+                .
+            </button>
+
+            <button 
+              className="equals"
+              id="equals"
+              onClick={this.handleOperationClick}>
+                =
+            </button>
+          </section>
+
+          <section className="operations">
+            { operations.map(operation => (
+              <button 
+                key={ operation.id } 
+                id={ operation.id } 
+                onClick={this.handleOperationClick}>
+                  { operation.value }
+              </button>
+            )) }
+          </section>
         </div>
+        
+        
+        
 
-        <button 
-          className="ac" 
-          id="clear"
-          onClick={this.handleAcClick}>
-            AC
-        </button>
-
-        { numbers.map(number => (
-          <button 
-            key={ number.value }
-            id={ number.id }
-            onClick={this.handleNumberClick}>
-            { number.value }
-          </button>
-        )) }
-
-        <button 
-          className="dot"
-          id="decimal"
-          onClick={this.handleDecimalClick}>
-            .
-        </button>
-
-        { operations.map(operation => (
-          <button 
-            key={ operation.id } 
-            id={ operation.id } 
-            onClick={this.handleOperationClick}>
-              { operation.value }
-          </button>
-        )) }
-   
+        
       </main>
     );
   }
