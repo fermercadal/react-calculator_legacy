@@ -2,7 +2,7 @@
 
 [http://fermercadal.github.io/react-calculator](http://fermercadal.github.io/react-calculator)
 
-Work in progress. JS Calculator built using React. Fourth project for the FreeCodeCamp Front End Libraries certification.
+JS Calculator built using React. Fourth project for the FreeCodeCamp Front End Libraries certification.
 
 [User stories](https://www.freecodecamp.org/learn/front-end-libraries/front-end-libraries-projects/build-a-javascript-calculator)
 
