@@ -1,10 +1,14 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
+  font-size: 24px;
+}
+
+#root {
   align-items: center;
-  background: orange;
+  background: whitesmoke;
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -12,22 +16,88 @@ body {
 }
 
 .calculator {
-  display: flex;
-  flex-flow: row wrap;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  width: 240px;
-}
-
-.display {
-  padding: 5px;
+  height: 100vh;
   width: 100%;
 }
 
-button {
-  height: 50px;
-  margin: 5px;
-  width: 50px;
+h1 {
+  color: #222222;
+  flex: 0 0 auto;
+  font-size: 1.4rem;
+  padding: 60px 20px 30px 20px;
+  margin: 0px;
+  min-height: 120px;
+  text-align: center;
+  width: 100%;
 }
+
+.screen {
+  font-family: 'Share Tech Mono', monospace;
+  width: 100%;
+}
+
+.currentOperation {
+  background-color: lightseagreen;
+  color: lightgreen;
+  padding: 15px;
+  min-height: 58px;
+  text-align: right;
+}
+
+.display {
+  background-color: darkslateblue;
+  color: whitesmoke;
+  font-size: 3rem;
+  min-height: 84px;
+  padding: 15px;
+  text-align: right;
+  width: 100%;
+}
+
+.calculator-buttons {
+  display: flex;
+  height: calc(100vh - 262px);
+  flex-flow: row wrap;
+}
+
+.numbers {
+  background-color: lightcoral;
+  font-family: 'Share Tech Mono', monospace;
+  width: 78%;
+}
+
+.operations {
+  background-color: lightslategray;
+  font-family: 'Share Tech Mono', monospace;
+  width: 22%;
+}
+
+button {
+  border: 4px solid #222222;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  height: calc(20% - 10px);
+  margin: 5px;
+}
+
+.numbers button {
+  width: calc(33.33% - 10px) ;
+}
+
+.operations button {
+  width: calc(100% - 10px);
+}
+
+.operations button:last-child {
+  height: calc(40% - 10px) ;
+}
+
+button.ac {
+  width: calc(100% - 10px);
+}
+
+
+
+
 
