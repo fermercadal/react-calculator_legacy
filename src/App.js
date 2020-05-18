@@ -76,13 +76,15 @@ class App extends Component {
       ]
     }
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleNumberClick = this.handleNumberClick.bind(this);
+    this.handleAcClick = this.handleAcClick.bind(this);
+    this.handleDecimalClick = this.handleDecimalClick.bind(this);
+    this.handleClick = this.handleOperationClick.bind(this);
   }
 
-  handleClick = (e) => {
+  handleNumberClick = (e) => {
     const lastPressed = this.state.lastPressed;
     const currentNumber = this.state.currentNumber;
-    const previousNumber = this.state.previousNumber;
     const operation = this.state.operation
     const value = e.target.innerText;
     
@@ -109,89 +111,128 @@ class App extends Component {
       }
       return
     }
+  }
 
+  handleAcClick = (e) => {
+    const value = e.target.innerText;
+
+    this.setState({
+      lastPressed: value,
+      currentNumber: '0',
+      previousNumber: '',
+      operation: ''
+    });
+  }
+
+  handleDecimalClick = (e) => {
+    const currentNumber = this.state.currentNumber;
+    const value = e.target.innerText;
+
+    if(!currentNumber.includes('.')) {
+      this.setState({
+        currentNumber: currentNumber + value
+      });
+    }
+  }
+
+  handleOperationClick = (e) => {
+    const lastPressed = this.state.lastPressed;
+    const currentNumber = this.state.currentNumber;
+    const previousNumber = this.state.previousNumber;
+    const operation = this.state.operation
+    const value = e.target.innerText;
+    var evaluated = '';
+   
     switch(value) {
-      case('AC') : {
-        this.setState({
-          currentNumber: '0',
-          previousNumber: '',
-          operation: ''
-        });
-        break
-      }
-      case('.') : {
-        if(!currentNumber.includes('.')) {
-          this.setState({
-            currentNumber: currentNumber + value
-          });
-        }
-        break
-      }
-      default: {
-        // if press operation without first number 
-        if(value === '-') {
-          if(lastPressed === '' || lastPressed === '0' || lastPressed === 'AC'  ) {
-            this.setState({
-              currentNumber: value
-            });
-            return false;
-          }
-        }
-
-        // If press operation for the first time
+      case('=') : {
         if(!operation) {
-          if(value === '=') {
-            return false;
-          } else {
-            this.setState({
-              operation: value,
-              previousNumber: currentNumber,
-              currentNumber: '0'
-            });
-          }
+          return false;
         }
-
-        // If press operation after getting a result
+        else if(currentNumber === '-') {
+          return false;
+        }
         else if(lastPressed === '=' && operation === '=') {
-          if(value !== '=') {
-            this.setState({
-              operation: value,
-              previousNumber: currentNumber,
-              currentNumber: '0'
-            });
-          } 
-          // If press two consecutive equals
-          else {
-            return false;
-          }
+          return false;
         }
-        
-        // ...
         else {
-          console.log('operation' + value);
-          if(
-            value === '/' ||
-            value === '*' ||
-            value === '+'
-          ) {
-
-          }
-          const evaluated = eval(`${previousNumber} ${operation} ${currentNumber}`)
+          evaluated = eval(`${previousNumber} ${operation} ${currentNumber}`)
 
           this.setState({
+            lastPressed: value,
             operation: value,
             previousNumber: `${previousNumber} ${operation}  ${currentNumber}`,
-            currentNumber: value === '=' ? evaluated : '0'
+            currentNumber: evaluated
+          });
+        }
+        break;
+      }
+      
+      case('*') :
+      case('/') :
+      case('+') : {
+        // If last pressed is equal, use result as first number
+        if(lastPressed === '=' && operation === '=') {
+          this.setState({
+            lastPressed: value,
+            operation: value,
+            previousNumber: currentNumber,
+            currentNumber: '0'
+          });
+        }
+        else if(currentNumber === '0' && lastPressed !== '') {
+          this.setState({
+            lastPressed: value,
+            operation: value,
+          });
+        }
+        // Pressing operation for the firt time
+        else if(!operation) {
+          this.setState({
+            lastPressed: value,
+            operation: value,
+            previousNumber: currentNumber,
+            currentNumber: '0'
+          });
+        }
+        else if(currentNumber !== '-') {
+          this.setState({
+            lastPressed: value,
+            operation: value,
+            previousNumber: `${previousNumber} ${operation}  ${currentNumber}`,
+            currentNumber: '0'
+          });
+        } 
+        else {
+          this.setState({
+            lastPressed: value,
+            operation: value,
+            currentNumber: '0'
+          });
+        }
+        break;
+      }
+
+      case('-') : {
+        if (lastPressed === '-') {
+          return false;
+        }
+        if(currentNumber === '0') {
+          this.setState({
+            lastPressed: value,
+            currentNumber: value
+          });
+        }
+        else {
+          this.setState({
+            lastPressed: value,
+            operation: value,
+            previousNumber: `${previousNumber} ${operation}  ${currentNumber}`,
+            currentNumber: '0'
           });
         }
       }
     }
-
-    this.setState({
-      lastPressed: value
-    });
   }
-
   render() {
     const numbers = this.state.numbers;
     const operations = this.state.operations;
@@ -220,7 +261,7 @@ class App extends Component {
         <button 
           className="ac" 
           id="clear"
-          onClick={this.handleClick}>
+          onClick={this.handleAcClick}>
             AC
         </button>
 
@@ -228,7 +269,7 @@ class App extends Component {
           <button 
             key={ number.value }
             id={ number.id }
-            onClick={this.handleClick}>
+            onClick={this.handleNumberClick}>
             { number.value }
           </button>
         )) }
@@ -236,7 +277,7 @@ class App extends Component {
         <button 
           className="dot"
           id="decimal"
-          onClick={this.handleClick}>
+          onClick={this.handleDecimalClick}>
             .
         </button>
 
@@ -244,7 +285,7 @@ class App extends Component {
           <button 
             key={ operation.id } 
             id={ operation.id } 
-            onClick={this.handleClick}>
+            onClick={this.handleOperationClick}>
               { operation.value }
           </button>
         )) }
