@@ -16,12 +16,21 @@ body {
 }
 
 .calculator {
+  box-shadow: -1px 1px 12px -3px slategray; 
   height: 100vh;
+  max-width: unset;
   width: 100%;
 }
 
+@media screen and (min-width: 769px) {
+  .calculator {
+    height: 80vh;
+    max-width: 600px;
+  }
+}
+
 h1 {
-  color: #222222;
+  color: slategray;
   flex: 0 0 auto;
   font-size: 1.4rem;
   padding: 60px 20px 30px 20px;
@@ -29,6 +38,14 @@ h1 {
   min-height: 120px;
   text-align: center;
   width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  h1 {
+    min-height: 90px;
+    padding: 30px 20px 30px 20px;
+  }
+  
 }
 
 .screen {
@@ -56,8 +73,14 @@ h1 {
 
 .calculator-buttons {
   display: flex;
-  height: calc(100vh - 262px);
+  height: calc(100% - 262px);
   flex-flow: row wrap;
+}
+
+@media screen and (min-width: 769px) {
+  .calculator-buttons {
+    height: calc(100% - 232px);
+  }
 }
 
 .numbers {
