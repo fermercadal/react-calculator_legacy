@@ -8,7 +8,7 @@ body {
 
 #root {
   align-items: center;
-  background: whitesmoke;
+  background: #BC3732;
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -16,54 +16,67 @@ body {
 }
 
 .calculator {
-  box-shadow: -1px 1px 12px -3px slategray; 
+  background: #0a0808;
+  background: linear-gradient(90deg, #0a0808 20%, #181212 100%);
+  box-shadow: -1px 1px 12px -2px #571a17; 
   height: 100vh;
   max-width: unset;
+  padding-top: 30px;
   width: 100%;
 }
 
 @media screen and (min-width: 769px) {
   .calculator {
+    border-radius: 2%;
     height: 80vh;
     max-width: 600px;
+    overflow: hidden;
   }
 }
 
 h1 {
-  color: slategray;
+  color: #D9DBDA;
   flex: 0 0 auto;
   font-size: 1.4rem;
-  padding: 60px 20px 30px 20px;
+  padding: 5px 30px;
   margin: 0px;
-  min-height: 120px;
-  text-align: center;
+  min-height: 40px;
+  text-align: right;
   width: 100%;
+}
+
+
+.screen {
+  background: #D9DBDA;
+  background: radial-gradient(circle, #D9DBDA 0%, #CCCCCC 100%);
+  box-shadow: -1px -1px 8px 0px #b3b3b3 inset;
+  font-family: 'Share Tech Mono', monospace;
+  margin: 0px 30px 30px 30px;
+  padding: 15px;
+  width: calc(100% - 60px);
 }
 
 @media screen and (min-width: 769px) {
-  h1 {
-    min-height: 90px;
-    padding: 30px 20px 30px 20px;
+  .screen {
+    margin: 0px 30px 15px 30px;
   }
-  
-}
-
-.screen {
-  font-family: 'Share Tech Mono', monospace;
-  width: 100%;
 }
 
 .currentOperation {
-  background-color: lightseagreen;
-  color: lightgreen;
+  background: #6f7571;
+  background: linear-gradient(90deg, #6f7571 0%, #929c97 43%);
+  box-shadow: 0px 4px 8px -4px #575C59 inset;
+  color: #0a0808;
   padding: 15px;
   min-height: 58px;
   text-align: right;
 }
 
 .display {
-  background-color: darkslateblue;
-  color: whitesmoke;
+  background: rgb(111,117,113);
+  background: linear-gradient(90deg, #6f7571 0%, #929c97 43%);
+  box-shadow: 0px -4px 8px -4px #575C59 inset;
+  color: #0a0808;
   font-size: 3rem;
   min-height: 84px;
   padding: 15px;
@@ -72,36 +85,85 @@ h1 {
 }
 
 .calculator-buttons {
+  background: rgb(243,245,244);
+  background: radial-gradient(circle, rgba(243,245,244,1) 0%, rgba(196,196,194,1) 86%);
   display: flex;
-  height: calc(100% - 262px);
   flex-flow: row wrap;
+  height: calc(100% - 242px);
+  padding: 30px 30px 30px 30px;
 }
 
 @media screen and (min-width: 769px) {
   .calculator-buttons {
-    height: calc(100% - 232px);
+    height: calc(100% - 227px);
+    padding: 15px 30px 30px 30px;
   }
 }
 
 .numbers {
-  background-color: lightcoral;
   font-family: 'Share Tech Mono', monospace;
   width: 78%;
 }
 
 .operations {
-  background-color: lightslategray;
   font-family: 'Share Tech Mono', monospace;
   width: 22%;
 }
 
 button {
-  border: 4px solid #222222;
+  border-radius: 8px;
+  box-shadow: -2px 2px 6px -4px #545454;
   font-family: 'Share Tech Mono', monospace;
   font-size: 1.2rem;
   font-weight: bold;
   height: calc(20% - 10px);
   margin: 5px;
+}
+
+button,
+button.btn__number {
+  background: #f4f5f3;
+  background: radial-gradient(circle, #f4f5f3 0%, #e9ebe8 86%);
+  border-top: 1px solid #666666;
+  border-left: 2px solid #666666;
+  border-right: 2px solid #666666;
+  border-bottom: 2px solid #666666;
+  color: #0a0808;
+}
+
+button.btn__operation {
+  background: #3B4047;
+  background: radial-gradient(circle, #3B4047 0%, #2a2e33 86%);
+  border-top: 1px solid #222222;
+  border-left: 2px solid #222222;
+  border-right: 2px solid #222222;
+  border-bottom: 2px solid #222222;
+  color: #e9ebe8;
+}
+
+button.dot {
+  background: #d9dbda;
+  background: radial-gradient(circle, #e8ebe9 0%, #d9dbda 86%);
+}
+
+button.equals {
+  background: #E36B52;
+  background: radial-gradient(circle, #fa755a 0%, #E36B52 86%);
+  border-top: 1px solid #47211a;
+  border-left: 2px solid #47211a;
+  border-right: 2px solid #47211a;
+  border-bottom: 2px solid #47211a;
+  color: #47211a;
+}
+
+button.ac {
+  background: #F3AD4F;
+  background: radial-gradient(circle, #ffb554 0%, #F3AD4F 86%);
+  border-top: 1px solid #402d15;
+  border-left: 2px solid #402d15;
+  border-right: 2px solid #402d15;
+  border-bottom: 2px solid #402d15;
+  color: #402d15;
 }
 
 .numbers button {

@@ -249,7 +249,7 @@ class App extends Component {
     return (
       <main id="calculator" className="calculator">
         <div className="calculator-top">
-          <h1>React JS Calculator</h1>
+          <h1>REACT.JS Calculator</h1>
           <section className="screen">
             <div className="currentOperation">
               { currentOperation }
@@ -270,7 +270,8 @@ class App extends Component {
             </button>
 
             { numbers.map(number => (
-              <button 
+              <button
+                className="btn__number" 
                 key={ number.value }
                 id={ number.id }
                 onClick={this.handleNumberClick}>
@@ -295,7 +296,8 @@ class App extends Component {
 
           <section className="operations">
             { operations.map(operation => (
-              <button 
+              <button
+                className="btn__operation" 
                 key={ operation.id } 
                 id={ operation.id } 
                 onClick={this.handleOperationClick}>
