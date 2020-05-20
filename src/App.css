@@ -67,8 +67,8 @@ h1 {
   background: linear-gradient(90deg, #6f7571 0%, #929c97 43%);
   box-shadow: 0px 4px 8px -4px #575C59 inset;
   color: #0a0808;
-  padding: 15px;
-  min-height: 58px;
+  padding: 15px 15px 0px 15px;
+  min-height: 42px;
   text-align: right;
 }
 
@@ -78,8 +78,8 @@ h1 {
   box-shadow: 0px -4px 8px -4px #575C59 inset;
   color: #0a0808;
   font-size: 3rem;
-  min-height: 84px;
-  padding: 15px;
+  min-height: 74px;
+  padding: 5px 15px 15px 15px;
   text-align: right;
   width: 100%;
 }
@@ -89,13 +89,13 @@ h1 {
   background: radial-gradient(circle, rgba(243,245,244,1) 0%, rgba(196,196,194,1) 86%);
   display: flex;
   flex-flow: row wrap;
-  height: calc(100% - 242px);
+  height: calc(100% - 216px);
   padding: 30px 30px 30px 30px;
 }
 
 @media screen and (min-width: 769px) {
   .calculator-buttons {
-    height: calc(100% - 227px);
+    height: calc(100% - 200px);
     padding: 15px 30px 30px 30px;
   }
 }
